@@ -9,6 +9,7 @@ import { BASE_URL } from "../utils/constants.js";
 export default function Login() {
   const [emailId, setEmailId] = useState("peterparker@gmail.com");
   const [password, setPassword] = useState("Peter@123");
+  const [error, setError] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate(); // moved inside component
 
@@ -28,6 +29,7 @@ export default function Login() {
       dispatch(addUser(res.data));
       navigate("/"); // uncommented so it actually navigates after success
     } catch (err) {
+      setError(err.response?.data || "Login failed");
       console.log(err);
     }
   };
@@ -54,7 +56,7 @@ export default function Login() {
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
         />
-
+        <p className="text-red-500"> {error}</p>
         <button className="btn btn-neutral mt-4" onClick={handleLogin}>
           Login
         </button>
