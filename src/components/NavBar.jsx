@@ -49,7 +49,7 @@ export default function NavBar() {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow"
             >
               <li>
-                <Link to="/profile" className="justify-between">Profile <span className="badge">New</span></Link>
+                <Link to="/profile" className="justify-between">Profile </Link>
               </li>
               <li>
                 <button className="w-full text-left" onClick={() => console.log("settings clicked")}>Settings</button>
