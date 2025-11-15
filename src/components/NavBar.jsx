@@ -52,7 +52,7 @@ export default function NavBar() {
                 <Link to="/profile" className="justify-between">Profile </Link>
               </li>
               <li>
-                <button className="w-full text-left" onClick={() => console.log("settings clicked")}>Settings</button>
+                <Link to ="/connections">Connections</Link>
               </li>
               <li>
                 <button className="w-full text-left" onClick={handleLogout}>Logout</button>
