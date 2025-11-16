@@ -5,12 +5,14 @@ import axios from "axios";
 import { BASE_URL } from "../utils/constants";
 import { removeUser } from "../utils/userSlice";
 
+
+
 export default function NavBar() {
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleLogout = async (e) => {
+  const handleLogout = async () => {
     try {
       // optional: e?.preventDefault();
       console.log("handleLogout clicked");
@@ -53,6 +55,9 @@ export default function NavBar() {
               </li>
               <li>
                 <Link to ="/connections">Connections</Link>
+              </li>
+              <li>
+                <Link to ="/requests">Requests</Link>
               </li>
               <li>
                 <button className="w-full text-left" onClick={handleLogout}>Logout</button>

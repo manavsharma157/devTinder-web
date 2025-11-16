@@ -37,6 +37,8 @@ export default function Connections() {
             </div>
         )
     }
+
+    
   return (
   <div className="text-center my-10">
     <h1 className="text-bold text-2xl">Connections</h1>
