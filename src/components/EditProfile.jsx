@@ -195,7 +195,7 @@ export default function EditProfile() {
         <div className="card bg-base-300 w-full max-w-md shadow-xl flex-shrink-0 md:sticky md:top-10">
           <div className="card-body">
             <h2 className="card-title justify-center">Live Preview</h2>
-            {/* Correctly pass 'about' state as 'bio' prop */}
+            
             <UserCard
               user={{ firstName, lastName, photoUrl, age, gender, bio: about }}
             />

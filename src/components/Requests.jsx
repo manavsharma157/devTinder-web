@@ -9,6 +9,24 @@ import { useSelector } from "react-redux";
 export default function Requests() {
   const requests = useSelector((store) => store.requests);
   const dispatch = useDispatch();
+
+  const reviewRequests = async (status, _id) => {
+    try {
+      const res = await axios.post(
+        BASE_URL + "/request/review/" + status + "/" + _id,
+        {},
+        { withCredentials: true }
+      );
+      
+      // After a successful review, re-run fetchRequests to update the UI.
+      fetchRequests();
+
+    } catch (err) {
+      console.log(err);
+      // You can also add an alert here to show the user the error
+      alert("Failed to review request: " + (err.response?.data || err.message));
+    }
+  }; 
   const fetchRequests = async () => {
     try {
       const res = await axios.get(BASE_URL + "/user/requests/received", {
@@ -87,8 +105,18 @@ export default function Requests() {
 
               {/* 4. Right Side: Buttons */}
               <div className="flex flex-col md:flex-row gap-2">
-                <button className="btn btn-sm btn-primary">Reject</button>
-                <button className="btn btn-sm btn-secondary">Accept</button>
+                <button
+                  className="btn btn-sm btn-primary"
+                  onClick={() => reviewRequests("rejected", request._id)}
+                >
+                  Reject
+                </button>
+                <button
+                  className="btn btn-sm btn-secondary"
+                  onClick={() => reviewRequests("accepted", request._id)}
+                >
+                  Accept
+                </button>
               </div>
             </div>
           );
