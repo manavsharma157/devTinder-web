@@ -60,6 +60,9 @@ export default function NavBar() {
                 <Link to ="/requests">Requests</Link>
               </li>
               <li>
+                <Link to ="/premium">Premium</Link>
+              </li>
+              <li>
                 <button className="w-full text-left" onClick={handleLogout}>Logout</button>
               </li>
             </ul>
