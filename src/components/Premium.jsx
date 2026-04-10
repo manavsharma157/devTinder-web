@@ -1,10 +1,14 @@
 import React, { useState } from 'react'; // Added useState import
 import axios from 'axios';
 import { BASE_URL } from '../utils/constants.js';
+import { useEffect } from 'react';
+
 
 export default function Premium() {
     // Standardized variable name
     const [isUserPremium, setUserPremium] = useState(false);
+    useEffect(() => {verifyPremiumUser}, []);
+
 
     const verifyPremiumUser = async () => {
         try {
