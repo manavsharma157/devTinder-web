@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 export default function Premium() {
     // Standardized variable name
     const [isUserPremium, setUserPremium] = useState(false);
-    useEffect(() => {verifyPremiumUser}, []);
+    useEffect(() => {verifyPremiumUser()}, []);
 
 
     const verifyPremiumUser = async () => {
