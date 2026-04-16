@@ -47,18 +47,15 @@ export default function Connections() {
     {/* A container for all the connection cards */}
     <div className="flex flex-col items-center gap-4 mt-6">
       {connections.map((connection) => {
-        // Destructure the data you need from the connection object
         const { _id, firstName, lastName, photoUrl, about , age, gender, bio } = connection;
 
-        // Return the card element for this connection
-        // Added key prop for React list rendering
         return (
           <div key={_id} className="flex items-center m-4 p-4 rounded-lg bg-base-300 w-full max-w-md shadow-lg">
             {/* Profile Image */}
             <div>
               <img
                 alt={`${firstName} ${lastName}'s photo`}
-                className="w-20 h-20 rounded-full object-cover" // Added rounded-full and object-cover
+                className="w-20 h-20 rounded-full object-cover"
                 src={photoUrl}
               />
             </div>

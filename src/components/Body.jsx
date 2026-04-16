@@ -10,7 +10,6 @@ import { addUser } from "../utils/userSlice";
 export default function Body() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // 1. Use location to check which page we are on
   const location = useLocation(); 
   const userData = useSelector((store) => store.user);
 
@@ -23,11 +22,7 @@ export default function Body() {
       });
       dispatch(addUser(res.data));
     } catch (err) {
-      // 2. FIXED: Axios stores status in err.response.status
       if (err.response?.status === 401) {
-        
-        // 3. FIXED: Prevent infinite redirect loop
-        // Only redirect if we are NOT already on login or signup page
         const isAuthPage = location.pathname === "/login" || location.pathname === "/signup";
         if (!isAuthPage) {
             navigate("/login");
@@ -39,13 +34,11 @@ export default function Body() {
 
   useEffect(() => {
     fetchUser();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className="flex flex-col min-h-screen">
       <NavBar />
-      {/* Use flex-grow to push Footer to bottom */}
       <div className="flex-grow">
         <Outlet />
       </div>

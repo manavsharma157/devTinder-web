@@ -9,7 +9,6 @@ export default function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
   const [error, setError] = useState(null);
 
-  // --- Form States ---
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [emailId, setEmailId] = useState("peterparker@gmail.com");
@@ -27,13 +26,11 @@ export default function AuthPage() {
     setError(null);
 
     try {
-      // 1. SHARED VALIDATION
       if (!emailId || !password) {
         setError("Please enter email and password.");
         return;
       }
 
-      // 2. SIGNUP SPECIFIC VALIDATION
       if (!isLogin) {
         if (!firstName || !lastName) {
           setError("First Name and Last Name are required.");
@@ -49,10 +46,8 @@ export default function AuthPage() {
         }
       }
 
-      // 3. DETERMINE ENDPOINT
       const endpoint = isLogin ? "/login" : "/signup";
 
-      // 4. CONSTRUCT PAYLOAD
       const payload = isLogin
         ? { emailId, password }
         : {
@@ -62,17 +57,14 @@ export default function AuthPage() {
             password,
             age: Number(age),
             gender,
-            // Only send these if they exist, otherwise let Mongoose use defaults
             ...(photoUrl && { photoUrl }),
             ...(bio && { bio }),
           };
 
-      // 5. API CALL
       const res = await axios.post(BASE_URL + endpoint, payload, {
         withCredentials: true,
       });
 
-      // 6. UPDATE REDUX & REDIRECT
       dispatch(addUser(res.data));
       navigate("/");
       
@@ -82,7 +74,6 @@ export default function AuthPage() {
         err.response?.data || 
         "Authentication failed";
       setError(errorMessage);
-      console.error(err);
     }
   };
 
@@ -93,15 +84,12 @@ export default function AuthPage() {
 
   return (
     <div className="min-h-screen bg-base-200 flex items-start justify-center p-4 pt-10">
-      <div className={`card w-full max-w-sm shadow-2xl bg-base-100 overflow-hidden transition-all duration-500 ${!isLogin ? "mt-5" : ""}`}>
+      <div className={`card w-full max-sm shadow-2xl bg-base-100 overflow-hidden transition-all duration-500 ${!isLogin ? "mt-5" : ""}`}>
         <div className="card-body">
-          
-          {/* TITLE */}
           <h1 className="card-title text-2xl justify-center mb-4">
             {isLogin ? "Login" : "Create Account"}
           </h1>
 
-          {/* --- SIGNUP FIELDS (HIDDEN ON LOGIN) --- */}
           {!isLogin && (
             <>
               <div className="flex gap-2">
@@ -142,9 +130,7 @@ export default function AuthPage() {
               </div>
             </>
           )}
-          {/* --- END SIGNUP FIELDS --- */}
 
-          {/* --- COMMON FIELDS --- */}
           <div className="form-control mt-2">
             <label className="label"><span className="label-text">Email</span></label>
             <input type="email" value={emailId} className="input input-bordered" placeholder="your@email.com" onChange={(e) => setEmailId(e.target.value)} />
@@ -155,24 +141,20 @@ export default function AuthPage() {
             <input type="password" value={password} className="input input-bordered" placeholder="********" onChange={(e) => setPassword(e.target.value)} />
           </div>
 
-          {/* ERROR DISPLAY */}
           {error && <p className="text-red-500 text-sm mt-2 font-semibold text-center">{error}</p>}
 
-          {/* SUBMIT BUTTON */}
           <div className="form-control mt-6">
             <button className="btn btn-primary" onClick={handleAuth}>
               {isLogin ? "Login" : "Sign Up"}
             </button>
           </div>
 
-          {/* TOGGLE LINK */}
           <p className="text-center text-sm mt-4 select-none">
             {isLogin ? "Don't have an account? " : "Already have an account? "}
             <span onClick={toggleAuthMode} className="link link-primary cursor-pointer hover:text-blue-600 font-semibold">
               {isLogin ? "Sign Up" : "Login"}
             </span>
           </p>
-
         </div>
       </div>
     </div>

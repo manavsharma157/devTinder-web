@@ -83,7 +83,6 @@ function Chat() {
       <div className="bg-[#232530] p-4 border-b border-gray-700">
         <h2 className="text-white font-bold flex items-center gap-2">
           <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-          {/* Changed targetUserId to targetUserName */}
           Chatting with: <span className="text-blue-400 font-medium">{targetUserName}</span>
         </h2>
       </div>

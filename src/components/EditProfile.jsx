@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../utils/userSlice.js";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants.js";
-// Import the UserCard component
 import UserCard from "./UserCard";
 
 export default function EditProfile() {
@@ -32,7 +31,6 @@ export default function EditProfile() {
       setPhotoUrl(user.photoUrl || "");
       setAge(user.age ?? "");
       setGender(user.gender || "");
-      // CHANGE 1: Correctly reads from 'bio'
       setAbout(user.bio || "");
     }
   }, [user]);
@@ -41,7 +39,6 @@ export default function EditProfile() {
     e.preventDefault();
     setError("");
 
-    // CHANGE 2: Correctly converts age
     const numericAge = age === "" ? null : Number(age);
 
     try {
@@ -51,7 +48,6 @@ export default function EditProfile() {
         photoUrl,
         age: numericAge,
         gender,
-        // CHANGE 3: Correctly maps 'about' state to 'bio' key
         bio: about,
       };
 
@@ -151,7 +147,6 @@ export default function EditProfile() {
                 />
               </div>
 
-              {/* Gender - CHANGED TO SELECT (This is the fix) */}
               <div className="form-control w-full mt-2">
                 <label className="label">
                   <span className="label-text">Gender</span>

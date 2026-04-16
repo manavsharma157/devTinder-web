@@ -18,12 +18,10 @@ export default function Requests() {
         { withCredentials: true }
       );
       
-      // After a successful review, re-run fetchRequests to update the UI.
       fetchRequests();
 
     } catch (err) {
       console.log(err);
-      // You can also add an alert here to show the user the error
       alert("Failed to review request: " + (err.response?.data || err.message));
     }
   }; 
@@ -33,10 +31,8 @@ export default function Requests() {
         withCredentials: true,
       });
 
-      // FIX 1: Dispatch the 'requests' array from the response object
       dispatch(addRequests(res.data.requests));
 
-      // FIX 2: Log the 'requests' array
       console.log("Fetched Requests:", res.data.requests);
     } catch (err) {
       console.log(err);
@@ -47,7 +43,7 @@ export default function Requests() {
     fetchRequests();
   }, []);
 
-  if (!requests) return; // This is fine, will be false after first render
+  if (!requests) return;
   if (requests.length === 0) {
     return (
       <div className=" flex justify-center my-10">
@@ -59,23 +55,20 @@ export default function Requests() {
 
   return (
     <div className="text-center my-10">
-      {/* Corrected main title */}
       <h1 className="text-bold text-2xl">Requests</h1>
 
-      {/* A container for all the connection cards */}
+      {/* container for all the connection cards */}
       <div className="flex flex-col items-center gap-4 mt-6">
         {requests.map((request) => {
-          // 1. Destructure age and gender (will be undefined if not in API)
+
           const { _id, firstName, lastName, photoUrl, bio, age, gender } =
             request.fromUserId;
 
           return (
-            // 2. Main card div now uses justify-between
             <div
               key={_id}
               className="flex items-center justify-between m-4 p-4 rounded-lg bg-base-300 w-full max-w-md shadow-lg"
             >
-              {/* Left Side: Wrapper for Avatar + Info */}
               <div className="flex items-center">
                 {/* Profile Image */}
                 <div>
@@ -92,8 +85,6 @@ export default function Requests() {
                     {firstName} {lastName}
                   </h2>
                   <p className="text-base-content/80">{bio}</p>
-
-                  {/* 3. Render Age and Gender if they exist */}
                   {(age || gender) && (
                     <p className="text-sm text-base-content/60 capitalize">
                       {gender}
@@ -103,7 +94,6 @@ export default function Requests() {
                 </div>
               </div>
 
-              {/* 4. Right Side: Buttons */}
               <div className="flex flex-col md:flex-row gap-2">
                 <button
                   className="btn btn-sm btn-primary"

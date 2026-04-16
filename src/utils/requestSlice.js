@@ -4,10 +4,10 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const requestSlice = createSlice ({
     name: "requests",
-    initialState : [], // <--- THIS IS THE FIX
+    initialState : [],
     reducers: {
         addRequests: (state, action) => action.payload,
-        removeRequests: (state, action) => [], // Also good to reset to an empty array
+        removeRequests: (state, action) => [],
         
     },
 });
