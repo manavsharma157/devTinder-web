@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { addConnections } from '../utils/connectionSlice.js';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 
 export default function Connections() {
@@ -47,7 +48,7 @@ export default function Connections() {
     <div className="flex flex-col items-center gap-4 mt-6">
       {connections.map((connection) => {
         // Destructure the data you need from the connection object
-        const { _id, firstName, lastName, photoUrl, about } = connection;
+        const { _id, firstName, lastName, photoUrl, about , age, gender, bio } = connection;
 
         // Return the card element for this connection
         // Added key prop for React list rendering
@@ -66,7 +67,12 @@ export default function Connections() {
             <div className="ml-4 text-left">
               <h2 className="text-xl font-semibold">{firstName} {lastName}</h2>
               <p className="text-base-content/80">{about}</p>
+              <p className="text-sm text-base-content/60 mt-1">{age} {gender}</p>
+              <p className="text-sm text-base-content/60 mt-1">{bio}</p>
             </div>
+            <Link to={`/chat/${_id}`} className="ml-auto">
+            <button className="mt-2 btn btn-sm btn-primary" >Chat</button>
+            </Link>
           </div>
         );
       })}

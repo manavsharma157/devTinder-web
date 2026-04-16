@@ -1,11 +1,10 @@
-import React, { useState } from 'react'; // Added useState import
+import React, { useState } from 'react';
 import axios from 'axios';
 import { BASE_URL } from '../utils/constants.js';
 import { useEffect } from 'react';
 
 
 export default function Premium() {
-    // Standardized variable name
     const [isUserPremium, setUserPremium] = useState(false);
     useEffect(() => {verifyPremiumUser()}, []);
 
@@ -48,7 +47,7 @@ export default function Premium() {
                 theme: {
                     color: "#F37254",
                 },
-                // Fixed: handler must be a proper function
+                
                 handler: function (response) {
                     verifyPremiumUser();
                 }
@@ -61,7 +60,7 @@ export default function Premium() {
         }
     };
 
-    // Fixed: used !isUserPremium so the pricing shows to non-premium users
+   
     return !isUserPremium ? (
         <div className="min-h-screen bg-[#0f1015] text-white flex flex-col items-center justify-center p-6 font-sans">
             <h1 className="text-4xl font-extrabold mb-10 tracking-wider">PRICING</h1>
